@@ -1914,32 +1914,105 @@ document.getElementById('xlsxInput').addEventListener('change', function(e) {
   e.target.value='';
 });
 
-// ── SAVE HTML ─────────────────────────────────────────────────────────────────
-document.getElementById('btnSave').onclick = () => {
+// ── SAVE HTML EN LIGNE SUR GITHUB ──────────────────────────────────────────────
+// À modifier avec TON compte GitHub.
+// repoPath doit être le nom exact du fichier publié, souvent: index.html
+const GITHUB_CONFIG = {
+  owner: 'TON_NOM_GITHUB',
+  repo: 'TON_DEPOT_GITHUB',
+  branch: 'main',
+  repoPath: 'index.html'
+};
+
+function showSaveMessage(text, isError=false) {
+  const msg = document.getElementById('saveMsg');
+  msg.textContent = text;
+  msg.style.color = isError ? '#ff6666' : '#00cc00';
+  msg.style.display = 'inline';
+  setTimeout(()=>{ msg.style.display='none'; msg.textContent='✅ Saved!'; msg.style.color='#00cc00'; }, 5000);
+}
+
+function buildCurrentHtmlForSave() {
   const html = document.documentElement.outerHTML;
   const re1 = /const DATA_PLAYLIST=\[[\s\S]*?\];/;
   const re2 = /const DATA_SPOTIFY=\[[\s\S]*?\];/;
   let newHtml = html
     .replace(re1, 'const DATA_PLAYLIST=' + JSON.stringify(DATA_PLAYLIST) + ';')
     .replace(re2, 'const DATA_SPOTIFY='  + JSON.stringify(DATA_SPOTIFY)  + ';');
-  newHtml = newHtml.replace(
-    /bass_playlist-(?:pc-)?V(\d+)\.html/g,
-    function(m,n){ return 'bass_playlist-pc-V'+(parseInt(n)+1)+'.html'; }
-  );
-  newHtml = '<!doctype html>\n' + newHtml;
-  const vMatch = newHtml.match(/bass_playlist-pc-V(\d+)\.html/);
-  const filename = vMatch ? vMatch[0] : 'bass_playlist-pc-V10.html';
-  const blob = new Blob([newHtml], {type:'text/html;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url; a.download=filename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  const msg = document.getElementById('saveMsg');
-  msg.textContent = '✅ Saved as '+filename;
-  msg.style.display='inline';
-  setTimeout(()=>{msg.style.display='none'; msg.textContent='✅ Saved!';},3000);
+  return '<!doctype html>\n' + newHtml;
+}
+
+function utf8ToBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+async function saveHtmlToGitHub() {
+  const { owner, repo, branch, repoPath } = GITHUB_CONFIG;
+
+  if (owner === 'TON_NOM_GITHUB' || repo === 'TON_DEPOT_GITHUB') {
+    throw new Error('Configure d’abord GITHUB_CONFIG : owner, repo, branch et repoPath.');
+  }
+
+  // Ne mets jamais ton token directement dans le HTML public.
+  // Il est demandé au clic et conservé seulement pour l’onglet ouvert.
+  let token = sessionStorage.getItem('github_token');
+  if (!token) {
+    token = prompt('Colle ton GitHub token fine-grained autorisé pour ce dépôt :');
+    if (!token) throw new Error('Sauvegarde annulée : token manquant.');
+    sessionStorage.setItem('github_token', token);
+  }
+
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${repoPath}`;
+
+  // 1) Lire le fichier actuel pour récupérer son SHA obligatoire
+  const getResp = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  });
+  if (!getResp.ok) {
+    const txt = await getResp.text();
+    throw new Error('Impossible de lire le fichier sur GitHub : ' + txt);
+  }
+  const currentFile = await getResp.json();
+
+  // 2) Envoyer la nouvelle version du HTML
+  const newHtml = buildCurrentHtmlForSave();
+  const putResp = await fetch(apiUrl, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    },
+    body: JSON.stringify({
+      message: 'Save playlist from web page',
+      content: utf8ToBase64(newHtml),
+      sha: currentFile.sha,
+      branch: branch
+    })
+  });
+
+  if (!putResp.ok) {
+    const txt = await putResp.text();
+    throw new Error('Erreur pendant l’écriture sur GitHub : ' + txt);
+  }
+}
+
+document.getElementById('btnSave').onclick = async () => {
+  try {
+    showSaveMessage('⏳ Saving online...');
+    await saveHtmlToGitHub();
+    showSaveMessage('✅ Saved online on GitHub');
+  } catch (err) {
+    console.error(err);
+    showSaveMessage('❌ ' + err.message, true);
+  }
 };
+
 </script>
 
 
