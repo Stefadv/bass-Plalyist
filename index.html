@@ -90,7 +90,7 @@ header {
 #cards-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
 .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
   padding: 16px 18px 14px; transition: all .2s; position: relative; overflow: hidden;
-  animation: fadeIn .2s ease both; }
+  animation: fadeIn .2s ease both; cursor: pointer; }
 .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
   background: var(--tc, var(--red)); border-radius: 12px 0 0 12px; }
 .card:hover { border-color: var(--tc, var(--red)); transform: translateY(-2px);
@@ -122,7 +122,7 @@ header {
 .list-table th:hover { color: var(--text); }
 .list-table th .sort-arrow { margin-left: 4px; opacity: 0.4; }
 .list-table th.sorted .sort-arrow { opacity: 1; color: var(--red); }
-.list-row { border-bottom: 1px solid var(--border); transition: background .12s; animation: fadeIn .15s ease both; }
+.list-row { border-bottom: 1px solid var(--border); transition: background .12s; animation: fadeIn .15s ease both; cursor: pointer; }
 .list-row:hover { background: var(--bg2); }
 .list-row td { padding: 10px 12px; vertical-align: middle; font-size: 0.82rem; }
 .td-artist { font-family: 'Oswald', sans-serif; font-size: 1.05rem; font-weight: 600;
@@ -542,88 +542,12 @@ header {
           <th style="width:36px"></th>
         </tr>
       </thead>
-      <tbody id="list-body"><tr class="list-row">
-      <td class="td-artist t-EADG">Serge Gainsbourg</td>
-      <td class="td-title">Bonnie &amp; Clyde</td>
-      <td class="td-stars">★★</td>
-      <td class="td-tuning t-EADG">EADG</td>
-      <td><div class="td-links"><a class="ico-link spotify" href="https://open.spotify.com/intl-fr/track/358jMpTqOfIOYjpcg2Ig2j?si=95477a0881ec4aeb" target="_blank" title="Spotify"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg></a><a class="ico-link tab" href="https://www.songsterr.com/a/wsa/serge-gainsbourg-bonnie-and-clyde-bass-tab-s53130" target="_blank" title="Songsterr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></a><a class="ico-link genius" href="https://genius.com/serge-gainsbourg-bonnie-clyde-lyrics" target="_blank" title="Lyrics (Genius)"><svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="#FFFF64"></circle><path d="M10 11.5C10 8.46 12.46 6 15.5 6c2.12 0 3.97 1.21 4.9 2.98l-1.73 1c-.6-1.13-1.78-1.9-3.17-1.9-1.96 0-3.5 1.54-3.5 3.42v4.5c0 .83.31 1.58.82 2.15L11 19.5c-.62-.83-1-1.86-1-3V11.5zm12 .5v8h-5v-2h3v-3.6l-3.5 2.1-1-1.73 4.5-2.77H22zm-6.5 9c.96 0 1.85-.3 2.58-.8l1.28 1.56A6.48 6.48 0 0115.5 23C12.46 23 10 20.54 10 17.5v-1.34l2 .34v1c0 1.88 1.54 3.5 3.5 3.5z" fill="#000"></path></svg></a></div></td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem">✔</td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem"></td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem"></td>
-      <td style="text-align:center"><span class="btn-edit" onclick="openEditModal(49)" title="Edit">✏️</span></td>
-    </tr><tr class="list-row">
-      <td class="td-artist t-EADG">Serge Gainsbourg</td>
-      <td class="td-title">Ballade de Melody Nelson</td>
-      <td class="td-stars">★</td>
-      <td class="td-tuning t-EADG">EADG</td>
-      <td><div class="td-links"><a class="ico-link spotify" href="https://open.spotify.com/search/Serge%20Gainsbourg%20Ballade%20de%20Melody%20Nelson" target="_blank" title="Spotify"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg></a><a class="ico-link tab" href="https://www.songsterr.com/a/wa/search?pattern=Serge%20Gainsbourg%20Ballade%20de%20Melody%20Nelson&amp;instruments%5B%5D=bass" target="_blank" title="Songsterr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></a><a class="ico-link genius" href="https://genius.com/serge-gainsbourg-ballade-de-melody-nelson-lyrics" target="_blank" title="Lyrics (Genius)"><svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="#FFFF64"></circle><path d="M10 11.5C10 8.46 12.46 6 15.5 6c2.12 0 3.97 1.21 4.9 2.98l-1.73 1c-.6-1.13-1.78-1.9-3.17-1.9-1.96 0-3.5 1.54-3.5 3.42v4.5c0 .83.31 1.58.82 2.15L11 19.5c-.62-.83-1-1.86-1-3V11.5zm12 .5v8h-5v-2h3v-3.6l-3.5 2.1-1-1.73 4.5-2.77H22zm-6.5 9c.96 0 1.85-.3 2.58-.8l1.28 1.56A6.48 6.48 0 0115.5 23C12.46 23 10 20.54 10 17.5v-1.34l2 .34v1c0 1.88 1.54 3.5 3.5 3.5z" fill="#000"></path></svg></a></div></td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem">✔</td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem"></td>
-      <td style="text-align:center;color:var(--red);font-size:0.8rem"></td>
-      <td style="text-align:center"><span class="btn-edit" onclick="openEditModal(101)" title="Edit">✏️</span></td>
-    </tr></tbody>
+      <tbody id="list-body"></tbody>
     </table>
     <div id="list-empty" class="empty-state" style="display: none;">No songs match your filters.</div>
   </div>
   <div id="spotify-view" style="display:none">
-    <div class="sp-grid" id="sp-grid"><div class="sp-card t-CFA">
-      <div>
-        <div class="sp-tuning">CFA#D#</div>
-        <div class="sp-count">17 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/1agrcvYSEkFlLILeQODSo8?si=b61e5f5d06a94853" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card t-EADG">
-      <div>
-        <div class="sp-tuning">EADG</div>
-        <div class="sp-count">46 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/2HiF3Odw7xXOWvoRJGiFod?si=0dcf3c7977a046b3" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card t-DsGsCsFs">
-      <div>
-        <div class="sp-tuning">D#G#C#F#</div>
-        <div class="sp-count">24 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/07k07mJZ2DvIuVbCZDVhzk?si=4a1e72aa352448f6" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card t-DropCs">
-      <div>
-        <div class="sp-tuning">Drop C# (C# G# C# F#)</div>
-        <div class="sp-count">6 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/5w2cbQsONDg4cy85c3EZFb?si=25ecc90c6d924f24" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card t-DropC">
-      <div>
-        <div class="sp-tuning">Drop C (C G C F)</div>
-        <div class="sp-count">3 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/21X4YMKhvvxQaOZTQsu2jw?si=a30da516bfc1421c" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card t-DADG">
-      <div>
-        <div class="sp-tuning">DADG</div>
-        <div class="sp-count">2 songs in playlist</div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/5KDoZFkh4pThHtjjUMpe83?si=8c284b6584b1478b" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div><div class="sp-card ">
-      <div>
-        <div class="sp-tuning">Alex List</div>
-        <div class="sp-count"></div>
-      </div>
-      <a class="sp-link" href="https://open.spotify.com/playlist/3xmlcGiE34neTOrEH4R1Nf?si=75fd64f159fa4beb" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.441 17.314a.75.75 0 01-1.03.244c-2.822-1.726-6.376-2.116-10.565-1.16a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.685 1.349a.75.75 0 01.244 1.03zm1.452-3.228a.938.938 0 01-1.288.308c-3.228-1.983-8.148-2.558-11.97-1.4a.937.937 0 01-.578-1.788c4.363-1.283 9.788-.661 13.528 1.592a.938.938 0 01.308 1.288zm.124-3.36C15.34 8.662 9.375 8.47 5.797 9.565a1.125 1.125 0 01-.652-2.15c4.13-1.252 10.99-1.01 15.33 1.598a1.125 1.125 0 01-1.458 1.713z"></path></svg> Open on Spotify
-      </a>
-    </div></div>
+    <div class="sp-grid" id="sp-grid"></div>
   </div>
 </div>
 
@@ -782,6 +706,11 @@ function sorted(d) {
   });
 }
 
+function goToTab(idx) {
+  const r = DATA_PLAYLIST[idx];
+  if (r && r.Tablatur) window.open(r.Tablatur, '_blank');
+}
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function renderCards() {
   const data = sorted(filtered());
@@ -795,14 +724,14 @@ function renderCards() {
       r.Eliott==='x'         ? '<span class="flag on">Eliott</span>' : '',
       r['Player x']==='x'   ? '<span class="flag on">Player x</span>' : ''
     ].filter(Boolean).join('');
-    return `<div class="card ${tc}">
+    return `<div class="card ${tc}" onclick="goToTab(${idx})">
       <div class="card-artist">${r.Artist}</div>
       <div class="card-title">${r.Title}</div>
       <div class="card-meta">
         ${starsHtml(r['⭐ Level'])}
         ${r.Tuning ? `<span class="tuning-badge">${r.Tuning}</span>` : ''}
       </div>
-      <div class="card-links">
+      <div class="card-links" onclick="event.stopPropagation()">
         ${linksHtml(r)}
         <span class="btn-edit" onclick="openEditModal(${idx})" title="Edit">✏️</span>
       </div>
@@ -820,16 +749,16 @@ function renderList() {
   body.innerHTML = data.map(r => {
     const tc = tuningClass(r.Tuning);
     const idx = DATA_PLAYLIST.findIndex(s => s === r);
-    return `<tr class="list-row">
+    return `<tr class="list-row" onclick="goToTab(${idx})">
       <td class="td-artist ${tc}">${r.Artist}</td>
       <td class="td-title">${r.Title}</td>
       <td class="td-stars">${r['⭐ Level'] ? '★'.repeat(r['⭐ Level'].length) : '<span style="color:var(--text3);font-size:0.7rem">—</span>'}</td>
       <td class="td-tuning ${tc}">${r.Tuning || '—'}</td>
-      <td><div class="td-links">${linksHtml(r)}</div></td>
+      <td onclick="event.stopPropagation()"><div class="td-links">${linksHtml(r)}</div></td>
       <td style="text-align:center;color:var(--red);font-size:0.8rem">${r['List Eliott']==='x'?'✔':''}</td>
       <td style="text-align:center;color:var(--red);font-size:0.8rem">${r.Eliott==='x'?'✔':''}</td>
       <td style="text-align:center;color:var(--red);font-size:0.8rem">${r['Player x']==='x'?'✔':''}</td>
-      <td style="text-align:center"><span class="btn-edit" onclick="openEditModal(${idx})" title="Edit">✏️</span></td>
+      <td style="text-align:center" onclick="event.stopPropagation()"><span class="btn-edit" onclick="openEditModal(${idx})" title="Edit">✏️</span></td>
     </tr>`;
   }).join('');
 }
