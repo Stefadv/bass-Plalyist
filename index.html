@@ -1074,14 +1074,13 @@ async function saveHtmlToGitHub() {
     throw new Error('Configure d’abord GITHUB_CONFIG : owner, repo, branch et repoPath.');
   }
 
-  // Ne mets jamais ton token directement dans le HTML public.
-  // Il est demandé au clic et conservé seulement pour l’onglet ouvert.
-  let token = sessionStorage.getItem('github_token');
-  if (!token) {
-    token = prompt('Colle ton GitHub token fine-grained autorisé pour ce dépôt :');
-    if (!token) throw new Error('Sauvegarde annulée : token manquant.');
-    sessionStorage.setItem('github_token', token);
-  }
+let token = localStorage.getItem('github_token');
+
+if (!token) {
+    token = prompt('Colle ton GitHub token :');
+    if (!token) return;
+    localStorage.setItem('github_token', token);
+}
 
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${repoPath}`;
 
